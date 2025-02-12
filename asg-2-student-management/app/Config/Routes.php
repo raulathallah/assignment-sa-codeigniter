@@ -12,11 +12,13 @@ use CodeIgniter\Router\RouteCollection;
 
  $routes->get('/', [Home::class, 'index']);
  $routes->group('article', function($routes){
-  $routes->get('', [Article::class, 'index']);
+  $routes->get('', [Article::class, 'index'], ['as' => 'article_list']);
   $routes->get('new', [Article::class, 'new']);
+  $routes->get('edit/(:num)/title/(:segment)', [Article::class, 'edit'], ['as' => 'article_edit']);
   $routes->post('create', [Article::class, 'create']);
-  $routes->get('detail/(:num)', [Article::class, 'show']);
-  $routes->get('delete/(:num)', [Article::class, 'delete']);
+  $routes->post('update/(:segment)', [Article::class, 'update']);
+  $routes->get('detail/(:num)/title/(:segment)', [Article::class, 'show'], ['as' => 'article_detail']);
+  $routes->get('delete/(:segment)', [Article::class, 'delete']);
 });
 
  //$routes->resource('article');

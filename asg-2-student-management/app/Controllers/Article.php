@@ -37,18 +37,35 @@ class Article extends BaseController
         );
     }
 
+    public function edit($id, $title)
+    {
+        $data = $this->articleModel->getArticleById($id, $title);
+        return view('article/form_edit', 
+            $this->pass_data([
+                'title' => 'Edit Article Form',
+                'article' => $data
+            ])
+        );
+    }
+
     public function create()
     {
         $data = $this->articleModel->getAllArticle();
         $new_article = new EntitiesArticle("".count($data) + 1, $this->request->getPost());
-
         $this->articleModel->addArticle($new_article);
         return redirect()->to('/article');
     }
 
-    public function show($id)
+    public function update($id)
     {
-        $data = $this->articleModel->getArticleById($id);
+        $new_article = new EntitiesArticle($id, $this->request->getPost());
+        $this->articleModel->updateArticle($new_article);
+        return redirect()->to('/article');
+    }
+
+    public function show($id, $title)
+    {
+        $data = $this->articleModel->getArticleById($id, $title);
         return view('article/detail',  
             $this->pass_data([
                 'article' => $data

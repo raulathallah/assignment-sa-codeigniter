@@ -21,10 +21,10 @@ use CodeIgniter\Model;
       return $this->article;
     }
 
-    public function getArticleById($id)
+    public function getArticleById($id, $title)
     {
       foreach($this->article as $row){
-        if($row->id == $id){
+        if($row->id == $id && $row->title == $title){
           return $row;
         }
       }
@@ -45,7 +45,7 @@ use CodeIgniter\Model;
       }
     }
 
-    public function updateMahasiswa(Article $new){
+    public function updateArticle(Article $new){
       foreach($this->article as $key => $row){
         if($row->id == $new->id){
           $this->article[$key] = $new;
