@@ -13,7 +13,7 @@
 <body>
    
    <h1>Welcome to the Article Management System</h1>
-   <a href="/article"><button>Article</button></a>
+   <a href="/articles"><button>Article</button></a>
 
 </body>
 </html>

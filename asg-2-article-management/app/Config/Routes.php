@@ -1,8 +1,7 @@
 <?php
 
-use App\Controllers\Article;
+use App\Controllers\Articles;
 use App\Controllers\Home;
-use App\Controllers\Mahasiswa;
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -10,36 +9,22 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 
- $routes->get('/', [Home::class, 'index']);
- $routes->group('article', function($routes){
-  $routes->get('', [Article::class, 'index'], ['as' => 'article_list']);
-  $routes->get('new', [Article::class, 'new']);
-  $routes->get('edit/(:num)/title/(:segment)', [Article::class, 'edit'], ['as' => 'article_edit']);
-  $routes->post('create', [Article::class, 'create']);
-  $routes->post('update/(:segment)', [Article::class, 'update']);
-  $routes->get('detail/(:num)/title/(:segment)', [Article::class, 'show'], ['as' => 'article_detail']);
-  $routes->get('delete/(:segment)', [Article::class, 'delete']);
-});
+$routes->get('/', [Home::class, 'index']);
 
- //$routes->resource('article');
- 
 /*
-
-$routes->get('/', [Mahasiswa::class, 'index']);
-$routes->get('mahasiswa/detail/(:any)', [Mahasiswa::class, 'detail']);
-
-$routes->get('mahasiswa/create', [Mahasiswa::class, 'create']);
-$routes->get('mahasiswa/edit/(:num)', [Mahasiswa::class, 'update']);
-
-$routes->post('mahasiswa/save_add', [Mahasiswa::class, 'save_add']);
-$routes->post('mahasiswa/save_update', [Mahasiswa::class, 'save_update']);
-$routes->get('mahasiswa/delete/(:any)', [Mahasiswa::class, 'delete']);
-
-
-
+$routes->resource('article', [
+  'except' => 'new,edit'
+]);
 */
 
-
-
+$routes->group('articles', function($routes){
+  $routes->get('', [Articles::class, 'getIndex'], ['as' => 'article_list']);
+  $routes->get('new', [Articles::class, 'getNew']);
+  $routes->get('edit/(:num)/(:segment)', [Articles::class, 'getEdit'], ['as' => 'article_edit']);
+  $routes->post('create', [Articles::class, 'postCreate']);
+  $routes->put('update/(:segment)', [Articles::class, 'putUpdate']);
+  $routes->get('show/(:num)/(:segment)', [Articles::class, 'getShow'], ['as' => 'article_detail']);
+  $routes->delete('remove/(:segment)', [Articles::class, 'deleteRemove']);
+});
 
 

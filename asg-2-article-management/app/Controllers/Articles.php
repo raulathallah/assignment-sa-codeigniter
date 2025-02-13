@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Entities\Article as EntitiesArticle;
 use App\Models\M_Article;
 
-class Article extends BaseController
+class Articles extends BaseController
 {
     private $articleModel;
     private $pageInformation = [
@@ -17,7 +17,7 @@ class Article extends BaseController
         $this->articleModel = new M_Article();
     }
 
-    public function index()
+    public function getIndex()
     {
         $data = $this->articleModel->getAllArticle();
         return view('article/index', 
@@ -28,7 +28,7 @@ class Article extends BaseController
         );
     }
 
-    public function new()
+    public function getNew()
     {
         return view('article/form_new', 
             $this->pass_data([
@@ -37,7 +37,7 @@ class Article extends BaseController
         );
     }
 
-    public function edit($id, $title)
+    public function getEdit($id, $title)
     {
         $data = $this->articleModel->getArticleById($id, $title);
         return view('article/form_edit', 
@@ -48,22 +48,22 @@ class Article extends BaseController
         );
     }
 
-    public function create()
+    public function postCreate()
     {
         $data = $this->articleModel->getAllArticle();
         $new_article = new EntitiesArticle("".count($data) + 1, $this->request->getPost());
         $this->articleModel->addArticle($new_article);
-        return redirect()->to('/article');
+        return redirect()->to('/articles');
     }
 
-    public function update($id)
+    public function putUpdate($id)
     {
         $new_article = new EntitiesArticle($id, $this->request->getPost());
         $this->articleModel->updateArticle($new_article);
-        return redirect()->to('/article');
+        return redirect()->to('/articles');
     }
 
-    public function show($id, $title)
+    public function getShow($id, $title)
     {
         $data = $this->articleModel->getArticleById($id, $title);
         return view('article/detail',  
@@ -73,10 +73,10 @@ class Article extends BaseController
         );
     }
 
-    public function delete($id)
+    public function deleteRemove($id)
     {
         $this->articleModel->deleteArticle($id);
-        return redirect()->to('/article');
+        return redirect()->to('/articles');
     }
 
 

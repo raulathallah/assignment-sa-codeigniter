@@ -6,7 +6,7 @@
 <body>
     <h3><?= $title ?></h3>
 
-    <form action="/article/create" method="post" style="display: grid;width: fit-content; gap: 5px">
+    <form action="/articles/create" method="post" style="display: grid;width: fit-content; gap: 5px">
         <label>Title</label>
         <input 
             type="text"
