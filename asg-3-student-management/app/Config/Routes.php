@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\Academic;
 use App\Controllers\Mahasiswa;
 use CodeIgniter\Router\RouteCollection;
 
@@ -15,3 +16,7 @@ $routes->get('mahasiswa/edit/(:num)', [Mahasiswa::class, 'update']);
 $routes->post('mahasiswa/save_add', [Mahasiswa::class, 'save_add']);
 $routes->post('mahasiswa/save_update', [Mahasiswa::class, 'save_update']);
 $routes->get('mahasiswa/delete/(:any)', [Mahasiswa::class, 'delete']);
+
+
+$routes->get('course', [Academic::class, 'index']);
+$routes->get('academic-statistic', [Academic::class, 'getAcademicStatistic']);

@@ -1,9 +1,14 @@
 <?= $this->extend('layouts/main') ?>
 
 <?= $this->section('title') ?>
-  Mahasiswa
+  Courses
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-  <?= $content ?? '' ?>
+<div>
+    <h3>List Course</h3>
+    <hr>
+    <?= $table ?? '' ?>
+
+</div>
 <?= $this->endSection() ?>

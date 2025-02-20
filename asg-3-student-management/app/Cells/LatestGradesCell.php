@@ -23,7 +23,7 @@ class LatestGradesCell extends Cell
         });
         $dataFiltered = array_slice($dataSorted, 0, 5);
 
-        $table->addRow(['Course ID', 'Course Name', 'Joined Date', 'Grades']);
+        $table->addRow(['ID', 'Course', 'Joined Date', 'Grades']);
         foreach($dataFiltered as $row){
             $table->addRow($row);
         }

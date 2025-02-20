@@ -1,16 +1,14 @@
 <?= $this->extend('layouts/main') ?>
 
 <?= $this->section('title') ?>
-  Mahasiswa
+  Academic Statistic
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 <div>
-    <h3>List Mahasiswa</h3>
-    <a href="/mahasiswa/create"><button>Add Mahasiswa</button></a>
+    <h3>Academic Statistic</h3>
     <hr>
-
-    <?= $content ?? '' ?>
+    <h5>Total Course : <?= $count; ?></h5>
 
 </div>
 <?= $this->endSection() ?>

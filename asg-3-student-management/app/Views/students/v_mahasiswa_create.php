@@ -20,11 +20,23 @@
             id="nama"
             name="nama"
         />
-        <label>Jurusan</label>
+        <label>Program</label>
         <input 
             type="text"
-            id="jurusan"
-            name="jurusan"
+            id="program"
+            name="program"
+        />        
+        <label>Semester</label>
+        <input 
+            type="number"
+            id="semester"
+            name="semester"
+        />
+        <label>GPA</label>
+        <input 
+            type="text"
+            id="gpa"
+            name="gpa"
         />
         <label>Status</label>
         <input 
