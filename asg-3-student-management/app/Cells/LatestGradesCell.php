@@ -18,17 +18,16 @@ class LatestGradesCell extends Cell
         $table = new \CodeIgniter\View\Table();
 
         $dataSorted = $this->dataCourses;
-        usort($dataSorted, function ($a, $b) {
-            return strtotime($a['joinDate']) - strtotime($b['joinDate']);
+        uasort($dataSorted, function ($a, $b) {
+            return strcmp($a['grades'], $b['grades']);
         });
         $dataFiltered = array_slice($dataSorted, 0, 5);
 
         $table->addRow(['ID', 'Course', 'Joined Date', 'Grades']);
-        foreach($dataFiltered as $row){
+        foreach ($dataFiltered as $row) {
             $table->addRow($row);
         }
-        
+
         return $table->generate();
     }
-
 }
