@@ -40,9 +40,9 @@ class Mahasiswa extends BaseController
         $students = $studentsObject->toArray();
 
         $students['academic_status_cell'] = view_cell('AcademicStatusCell', ['status'=>$students['status']], DAY, 'cache_academic_status');
-        $students['latest_grades_cell'] = view_cell('LatestGradesCell', ['dataCourses'=>$students['courses']]);
+        $students['latest_grades_cell'] = view_cell('LatestGradesCell', ['dataCourses'=>$students['courses']], HOUR*6, 'cache_grades_cell');
 
-        $data['content'] = $parser->setData($students)->render('components/student_profile', ['cahce'=>'1', 'cache_name'=>'cache_student_profile']);
+        $data['content'] = $parser->setData($students)->render('components/student_profile');
         return view('students/v_mahasiswa_detail', $data);
     }
 
