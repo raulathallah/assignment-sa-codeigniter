@@ -3,16 +3,19 @@
 namespace App\Controllers;
 
 use App\Entities\Student;
+use App\Models\CourseModel;
 use App\Models\StudentModel;
 
 class Home extends BaseController
 {
 
     protected $studentModel;
+    protected $courseModel;
 
     public function __construct()
     {
         $this->studentModel = new StudentModel();
+        $this->courseModel = new CourseModel();
     }
 
     public function index(): string
@@ -30,6 +33,8 @@ class Home extends BaseController
             //$students = $db->table('students');
 
             $studentAll = $this->studentModel->findAll();
+            $courseAll = $this->courseModel->findAll();
+            $studentById = $this->studentModel->find(1);
 
             // $newStudent = new Student([
             //     'student_id' => 'STD003',
@@ -55,8 +60,8 @@ class Home extends BaseController
             // $sql1 = 'SELECT * FROM books WHERE bookid = ? AND category = ?';
             // $x = $db->query($sql1, [1, 'Romance'])->getResult('array');
 
-            foreach ($studentAll as $row) {
-                echo $row->student_id . ' - ' . $row->name . ' - ' . $row->entry_year . ' - ' . $row->study_program . ' || ' . $row->gpa;
+            foreach ($courseAll as $row) {
+                echo $row->code . ' - ' . $row->name . ' - ' . $row->credits;
                 echo '<br />';
             }
 

@@ -23,6 +23,9 @@ class Student extends Entity
         'entry_year'        => 'integer',
     ];
 
+    //protected $dates   = ['created_at', 'updated_at', 'deleted_at'];
+
+
     public function getStudentInfo()
     {
         return $this->attributes['student_id'] . ' - ' . $this->attributes['name'];
