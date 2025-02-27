@@ -24,7 +24,7 @@ class EnrollmentsSeeder extends Seeder
                 'student_id'            => 1,
                 'course_id'             => 2,
                 'academic_year'         => 2025,
-                'semester'              => 2,
+                'semester'              => 1,
                 'status'                => 'enrolled',
                 'created_at'            => new Time(),
                 'updated_at'            => new Time(),

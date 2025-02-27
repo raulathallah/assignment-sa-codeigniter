@@ -5,7 +5,7 @@
     <td>Study Program</td>
     <td>GPA</td>
     <td>Current Semester</td>
-    <td>Academic Status</td>
+    <!--  <td>Academic Status</td> -->
     <td>Entry Year</td>
 
 
@@ -19,10 +19,11 @@
     <td>{study_program}</td>
     <td>{gpa}</td>
     <td>{current_semester}</td>
-    <td>{academic_status}</td>
+
     <td>{entry_year}</td>
 
     <!--  
+     <td>{academic_status}</td>
       <td>
         <ul>
           {courses}

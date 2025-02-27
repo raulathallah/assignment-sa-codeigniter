@@ -13,7 +13,15 @@ class StudentGradesSeeder extends Seeder
         $data = [
             [
                 'enrollment_id'         => 1,
-                'grade_value'           => 96,
+                'grade_value'           => 88,
+                'grade_letter'          => "B",
+                'completed_at'          => new Time(),
+                'created_at'            => new Time(),
+                'updated_at'            => new Time(),
+            ],
+            [
+                'enrollment_id'         => 2,
+                'grade_value'           => 92,
                 'grade_letter'          => "A",
                 'completed_at'          => new Time(),
                 'created_at'            => new Time(),
@@ -21,7 +29,7 @@ class StudentGradesSeeder extends Seeder
             ],
             [
                 'enrollment_id'         => 3,
-                'grade_value'           => 80,
+                'grade_value'           => 84,
                 'grade_letter'          => "B",
                 'completed_at'          => new Time(),
                 'created_at'            => new Time(),

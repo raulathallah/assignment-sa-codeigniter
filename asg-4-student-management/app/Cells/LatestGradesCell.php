@@ -19,12 +19,26 @@ class LatestGradesCell extends Cell
 
         $dataSorted = $this->dataCourses;
         uasort($dataSorted, function ($a, $b) {
-            return strcmp($a['grades'], $b['grades']);
+            return $a['grade_value'] > $b['grade_value'] ? -1 : 1;
         });
+
         $dataFiltered = array_slice($dataSorted, 0, 5);
 
-        $table->addRow(['ID', 'Course', 'Joined Date', 'Grades']);
+
+        $dataTable = array();
         foreach ($dataFiltered as $row) {
+            array_push(
+                $dataTable,
+                [
+                    'code' => $row['code'],
+                    'name' => $row['name'],
+                    'grade_value' => $row['grade_value'] . ' (' . $row['grade_letter'] . ')'
+                ]
+            );
+        }
+
+        $table->addRow(['Course Code', 'Course Name', 'Grades']);
+        foreach ($dataTable as $row) {
             $table->addRow($row);
         }
 

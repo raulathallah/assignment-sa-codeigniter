@@ -8,9 +8,9 @@
     <span>Semester {current_semester}</span>
   </div>
 
-  <div>
+  <div class="mt-4">
     <h5>Grades</h5>
-    <!-- {!latest_grades_cell!} -->
+    {!latest_grades_cell!}
   </div>
 
 
