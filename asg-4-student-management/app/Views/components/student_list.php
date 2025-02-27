@@ -19,7 +19,6 @@
     <td>{study_program}</td>
     <td>{gpa}</td>
     <td>{current_semester}</td>
-
     <td>{entry_year}</td>
 
     <!--  

@@ -89,9 +89,16 @@ class Academic extends BaseController
     {
         $data = new Course($this->request->getPost());
 
-        //save to db
-        $this->modelCourse->save($data);
-        return redirect()->to('/course');
+        if ($this->modelCourse->save($data)) {
+
+            session()->setFlashdata('success', 'Course berhasil diubah');
+
+            return redirect()->to('/course');
+        }
+
+        return redirect()->back()
+            ->with('errors', $this->modelCourse->errors())
+            ->withInput();
     }
 
     public function deleteCourse($id)

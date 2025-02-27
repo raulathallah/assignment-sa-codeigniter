@@ -59,8 +59,6 @@ class Mahasiswa extends BaseController
         $db = db_connect();
         $db->initialize();
 
-
-
         //$studentsObject = $this->mhs_model->getStudentByNIM($nim);
         //$students = $studentsObject->toArray();
         $parser = \Config\Services::parser();
@@ -82,9 +80,9 @@ class Mahasiswa extends BaseController
         //     ->query('SELECT * FROM courses 
         //         JOIN enrollments ON enrollments.course_id = courses.id 
         //         JOIN student_grades ON enrollments.id = student_grades.enrollment_id
-        //         WHERE enrollments.student_id = $id
         //     ')
         //     ->getResult('array');
+
 
         $studentArray['academic_status_cell'] = view_cell('AcademicStatusCell', ['status' => $student->academic_status], DAY, 'cache_academic_status');
         $studentArray['latest_grades_cell'] = view_cell('LatestGradesCell', ['dataCourses' => $grades], HOUR * 6, 'cache_grades_cell');
@@ -110,9 +108,17 @@ class Mahasiswa extends BaseController
     {
         //$this->mhs_model->addStudent($newData);
         $data = new Student($this->request->getPost());
+        if ($this->modelStudent->save($data)) {
 
-        //save to db
-        $this->modelStudent->save($data);
+            session()->setFlashdata('success', 'Student berhasil disimpan');
+
+            return redirect()->to('/');
+        }
+
+        return redirect()->back()
+            ->with('errors', $this->modelStudent->errors())
+            ->withInput();
+        return redirect()->to('/');
 
         return redirect()->to('/');
     }
@@ -121,9 +127,16 @@ class Mahasiswa extends BaseController
     {
         //$this->mhs_model->updateMahasiswa($newData);
         $data = new Student($this->request->getPost());
+        if ($this->modelStudent->save($data)) {
 
-        //save to db
-        $this->modelStudent->save($data);
+            session()->setFlashdata('success', 'Student berhasil diubah');
+
+            return redirect()->to('/');
+        }
+
+        return redirect()->back()
+            ->with('errors', $this->modelStudent->errors())
+            ->withInput();
         return redirect()->to('/');
     }
 
