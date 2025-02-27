@@ -81,9 +81,9 @@ class Database extends Config
     public array $default = [
         'DSN'        => '',
         'hostname'   => 'localhost',
-        'username'   => 'postgres',
-        'password'   => '123900',
-        'database'   => 'academic',
+        'username'   => '',
+        'password'   => '',
+        'database'   => '',
         'schema'     => 'public',
         'DBDriver'   => 'Postgre',
         'DBPrefix'   => '',
