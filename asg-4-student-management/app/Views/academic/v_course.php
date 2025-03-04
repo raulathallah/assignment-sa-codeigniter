@@ -20,9 +20,20 @@ Courses
           </div>
         </div>
       </div>
+      <div class="col-md-2">
+        <div class="input-group ml-2">
+          <select name="semester" class="form-control" onchange="this.form.submit()">
+            <option value="">Semua Semester</option>
+            <?php foreach ($semester as $semester): ?>
+              <option value="<?= $semester ?>" <?= ($params->filters['semester'] == $semester) ? 'selected' : '' ?>><?= ucfirst($semester) ?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+      </div>
 
       <!-- ROLES -->
       <!-- ROLES -->
+
       <div class="col-md-2">
         <div class="input-group ml-2">
           <select name="perPage" class="form-control" onchange="this.form.submit()">
@@ -43,10 +54,26 @@ Courses
           Reset
         </a>
       </div>
+
+      <table class="table">
+        <thead>
+          <td><a href="<?= $params->getSortUrl('code', $baseUrl) ?>">
+              Course Code <?= $params->isSortedBy('code') ? ($params->getSortDirection() == 'asc' ?
+                            '↑' : '↓') : '' ?>
+            </a></td>
+          <td>Course Name</td>
+          <td>Credits</td>
+          <td>Semester</td>
+
+          <td>Action</td>
+        </thead>
+        <?= $content ?? '' ?>
+      </table>
   </form>
 
 
-  <?= $content ?? '' ?>
+
+
   <?= $pager->links('courses', 'custom_pager') ?>
 </div>
 <?= $this->endSection() ?>

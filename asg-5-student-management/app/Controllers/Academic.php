@@ -26,14 +26,18 @@ class Academic extends BaseController
 
         $params = new DataParams([
             'search' => $this->request->getGet('search'),
-            'filters' => [
-                'semester' => $this->request->getGet('semester')
-            ],
+            // 'filters' => [
+            //     'semester' => $this->request->getGet('semester')
+            // ],
+            'semester' => $this->request->getGet('semester'),
+            'credits'   => $this->request->getGet('credits'),
             'sort' => $this->request->getGet('sort'),
             'order' => $this->request->getGet('order'),
             'page' => $this->request->getGet('page'),
             'perPage' => $this->request->getGet('perPage')
         ]);
+
+
 
         $result = $this->modelCourse->getFilteredCourses($params);
 
@@ -54,13 +58,13 @@ class Academic extends BaseController
         ];
 
         $data = [
-            'title' => 'Manajemen Users',
+            //'title' => 'Manajemen Users',
             'courses' => $result['courses'],
             'pager' => $result['pager'],
             'total' => $result['total'],
             'params' => $params,
             'semester' => $this->modelCourse->getAllSemester(),
-            //'status' => $this->modelCourse->getAllStatus(),
+            'credits' => $this->modelCourse->getAllCredits(),
             'baseUrl' => base_url('course'),
             'content' => $parser->setData($dataArray)->render('components/course_list')
         ];

@@ -80,18 +80,25 @@ class CourseModel extends Model
                 ->groupEnd();
         }
 
-        $filterableFields = ['semester']; // Apply filter jika ada
-        foreach ($params->filters as $field => $value) {
-            if (in_array($field, $filterableFields) && $value !== '' && $value !== null) {
-                $this->where($field, $value);
-            }
+        if (!empty($params->semeter)) {
+            $this->where('semester', $params->semester);
         }
 
-        // Apply sort
-        $allowedSortColumns = ['code'];
-        $sort = in_array($params->sort, $allowedSortColumns) ? $params->sort : 'code';
-        $order = ($params->order === 'desc') ? 'desc' : 'asc';
+        if (!empty($params->credits)) {
+            $this->where('credits', $params->credits);
+        }
 
+        // $filterableFields = ['semester']; // Apply filter jika ada
+        // foreach ($params->filters as $field => $value) {
+        //     if (in_array($field, $filterableFields) && $value !== '' && $value !== null) {
+        //         $this->where($field, $value);
+        //     }
+        // }
+
+        // Apply sort
+        $allowedSortColumns = ['code', 'name'];
+        $sort = in_array($params->sort, $allowedSortColumns) ? $params->sort : 'id';
+        $order = ($params->order === 'desc') ? 'desc' : 'asc';
         $this->orderBy($sort, $order);
 
         $result = [
@@ -106,5 +113,11 @@ class CourseModel extends Model
     {
         $semester = $this->select('semester')->distinct()->findAll();
         return array_column($semester, 'semester');
+    }
+
+    public function getAllCredits()
+    {
+        $credits = $this->select('credits')->distinct()->findAll();
+        return array_column($credits, 'credits');
     }
 }

@@ -7,27 +7,33 @@ use CodeIgniter\HTTP\IncomingRequest;
 class DataParams
 {
     public $search = '';
-    public $filters = [];
+    //public $filters = [];
+    public $semester = '';
+    public $credits = '';
     public $sort = 'id';
     public $order = 'asc';
     public $page = 1;
-    public $perPage = 10;
+    public $perPage = 5;
 
     public function __construct(array $params = [])
     {
         $this->search = $params['search'] ?? '';
-        $this->filters = $params['filters'] ?? [];
+        //$this->filters = $params['filters'] ?? [];
+        $this->semester = $params['semester'] ?? '';
+        $this->credits = $params['credits'] ?? '';
         $this->sort = $params['sort'] ?? 'id';
         $this->order = $params['order'] ?? 'asc';
         $this->page = (int)($params['page'] ?? 1);
-        $this->perPage = (int)($params['perPage'] ?? 10);
+        $this->perPage = (int)($params['perPage'] ?? 5);
     }
 
     public function getParams()
     {
         return [
             'search' => $this->search,
-            'filters' => $this->filters,
+            //'filters' => $this->filters,
+            'semester' => $this->semester,
+            'credits' => $this->credits,
             'sort' => $this->sort,
             'order' => $this->order,
             'page' => $this->page,
