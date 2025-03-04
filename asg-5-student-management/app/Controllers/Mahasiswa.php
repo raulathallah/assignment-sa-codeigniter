@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Entities\Mahasiswa as EntitiesMahasiswa;
 use App\Entities\Student;
+use App\Libraries\DataParams;
 use App\Models\M_Mahasiswa as ModelsMahasiswa;
 use App\Models\StudentGradeModel;
 use App\Models\StudentModel;
@@ -21,6 +22,7 @@ class Mahasiswa extends BaseController
 
     public function index(): string
     {
+        $parser = \Config\Services::parser();
         // $db = db_connect();
         // $db->initialize();
         // if ($db->connID) {
@@ -36,6 +38,21 @@ class Mahasiswa extends BaseController
 
         $students = $this->modelStudent->findAll();
 
+        $params = new DataParams([
+            'search' => $this->request->getGet('search'),
+            // 'filters' => [
+            //     'semester' => $this->request->getGet('semester')
+            // ],
+            'study_program' => $this->request->getGet('study_program'),
+            'academic_status'   => $this->request->getGet('academic_status'),
+            'entry_year'   => $this->request->getGet('entry_year'),
+            'sort' => $this->request->getGet('sort'),
+            'order' => $this->request->getGet('order'),
+            'page' => $this->request->getGet('page_courses'),
+            'perPage' => $this->request->getGet('perPage')
+        ]);
+        $result = $this->modelStudent->getFilteredStudents($params);
+
         // $students_courses = $db
         //     ->query('SELECT students.id, courses.name FROM courses 
         //         JOIN enrollments ON enrollments.course_id = courses.id 
@@ -44,13 +61,24 @@ class Mahasiswa extends BaseController
         //     ->getResult('array');
 
 
-        $parser = \Config\Services::parser();
 
         $dataArray = [
-            'mahasiswa' => $students
+            'students' => $result['students']
         ];
 
-        $data['content'] = $parser->setData($dataArray)->render('components/student_list', ['cache' => 1800, 'cache_name' => 'student_list']);
+        $data = [
+            //'title' => 'Manajemen Users',
+            'students' => $result['students'],
+            'pager' => $result['pager'],
+            'total' => $result['total'],
+            'params' => $params,
+            'study_program' => $this->modelStudent->getAllStudyProgram(),
+            'academic_status' => $this->modelStudent->getAllAcademicStatus(),
+            'entry_year' => $this->modelStudent->getAllEntryYear(),
+            'baseUrl' => base_url('student'),
+            'content' => $parser->setData($dataArray)->render('components/student_list')
+        ];
+        //, ['cache' => 1800, 'cache_name' => 'student_list']
         return view('students/v_mahasiswa', $data);
     }
 

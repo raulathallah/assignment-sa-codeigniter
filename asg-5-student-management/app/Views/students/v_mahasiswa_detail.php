@@ -1,9 +1,9 @@
 <?= $this->extend('layouts/main') ?>
 
 <?= $this->section('title') ?>
-  Mahasiswa
+Mahasiswa
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-  <?= $content ?? '' ?>
+<?= $content ?? '' ?>
 <?= $this->endSection() ?>

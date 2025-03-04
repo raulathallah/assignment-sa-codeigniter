@@ -10,6 +10,9 @@ class DataParams
     //public $filters = [];
     public $semester = '';
     public $credits = '';
+    public $study_program = '';
+    public $academic_status = '';
+    public $entry_year = '';
     public $sort = 'id';
     public $order = 'asc';
     public $page = 1;
@@ -21,6 +24,9 @@ class DataParams
         //$this->filters = $params['filters'] ?? [];
         $this->semester = $params['semester'] ?? '';
         $this->credits = $params['credits'] ?? '';
+        $this->study_program = $params['study_program'] ?? '';
+        $this->academic_status = $params['academic_status'] ?? '';
+        $this->entry_year = $params['entry_year'] ?? '';
         $this->sort = $params['sort'] ?? 'id';
         $this->order = $params['order'] ?? 'asc';
         $this->page = (int)($params['page'] ?? 1);
@@ -34,6 +40,9 @@ class DataParams
             //'filters' => $this->filters,
             'semester' => $this->semester,
             'credits' => $this->credits,
+            'study_program' => $this->study_program,
+            'academic_status' => $this->academic_status,
+            'entry_year' => $this->entry_year,
             'sort' => $this->sort,
             'order' => $this->order,
             'page' => $this->page,

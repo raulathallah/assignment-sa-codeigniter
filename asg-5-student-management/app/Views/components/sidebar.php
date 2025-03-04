@@ -1,7 +1,8 @@
 <div class="mh-100" style="background-color: #121212;">
-  <ul class="list-group list-group-flush gap-1 p-1">
-    <li class=""><a class="btn btn-secondary w-100" href="/">Mahasiswa</a></li>
-    <li class=""><a class="btn btn-secondary w-100" href="/course">Course</a></li>
-    <li class=""><a class="btn btn-secondary w-100" href="/academic-statistic">Academic Statistic</a></li>
+  <ul class="list-group list-group-flush gap-2 p-1">
+    <li class=""><a class="btn btn-link text-white text-decoration-none text-start w-100" href="/">Home</a></li>
+    <li class=""><a class="btn btn-link text-white text-decoration-none text-start w-100" href="/student"><i class="me-2 bi bi-people-fill"></i>Mahasiswa</a></li>
+    <li class=""><a class="btn btn-link text-white text-decoration-none text-start w-100" href="/course"><i class="me-2 bi bi-book-half"></i>Course</a></li>
+    <li class=""><a class="btn btn-link text-white text-decoration-none text-start w-100" href="/academic-statistic"><i class="me-2 bi bi-bar-chart-fill"></i>Academic Statistic</a></li>
   </ul>
 </div>

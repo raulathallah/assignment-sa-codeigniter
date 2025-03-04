@@ -19,9 +19,9 @@ Mahasiswa
     <?php endif ?>
 
     <?php if ($type == "Create"): ?>
-        <form action="/mahasiswa/save_add" method="post" style="display: grid;width: fit-content; gap: 5px">
+        <form action="/student/save_add" method="post" style="display: grid;width: fit-content; gap: 5px">
         <?php else: ?>
-            <form action="/mahasiswa/save_update" method="post" style="display: grid;width: fit-content; gap: 5px">
+            <form action="/student/save_update" method="post" style="display: grid;width: fit-content; gap: 5px">
             <?php endif; ?>
 
             <?php if ($type == "Create"): ?>

@@ -97,11 +97,6 @@ Courses
 
 
   </div>
-
-  <div class="card-body">
-
-  </div>
-
 </div>
 
 <?= $this->endSection() ?>

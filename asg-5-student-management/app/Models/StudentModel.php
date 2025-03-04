@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Libraries\DataParams;
 use CodeIgniter\Model;
 
 class StudentModel extends Model
@@ -73,4 +74,58 @@ class StudentModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+
+    public function getFilteredStudents(DataParams $params)
+    {
+        if (!empty($params->search)) { // Apply search
+            $this->groupStart()
+                ->like('code', $params->search, 'both', null, true)
+                ->orLike('name', $params->search, 'both', null, true)
+                ->groupEnd();
+        }
+
+        if (!empty($params->study_program)) {
+            $this->where('study_program', $params->study_program);
+        }
+
+        if (!empty($params->academic_status)) {
+            $this->where('academic_status', $params->academic_status);
+        }
+
+        if (!empty($params->entry_year)) {
+            $this->where('entry_year', $params->entry_year);
+        }
+
+        // Apply sort
+        $allowedSortColumns = ['code', 'name'];
+        $sort = in_array($params->sort, $allowedSortColumns) ? $params->sort : 'id';
+        $order = ($params->order === 'desc') ? 'desc' : 'asc';
+        $this->orderBy($sort, $order);
+
+        $result = [
+            'students' => $this->paginate($params->perPage, 'students', $params->page),
+            'pager' => $this->pager,
+            'total' => $this->countAllResults(false)
+        ];
+        return $result;
+    }
+
+    public function getAllStudyProgram()
+    {
+        $study_program = $this->select('study_program')->distinct()->findAll();
+        return array_column($study_program, 'study_program');
+    }
+
+    public function getAllAcademicStatus()
+    {
+        $academic_status = $this->select('academic_status')->distinct()->findAll();
+        return array_column($academic_status, 'academic_status');
+    }
+
+    public function getAllEntryYear()
+    {
+        $entry_year = $this->select('entry_year')->distinct()->findAll();
+        return array_column($entry_year, 'entry_year');
+    }
 }

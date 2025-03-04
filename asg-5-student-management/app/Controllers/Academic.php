@@ -21,7 +21,7 @@ class Academic extends BaseController
     public function index()
     {
         //$courses = $this->course_model->getAllCourses();
-        $courses = $this->modelCourse->paginate(2, 'courses');
+        //$courses = $this->modelCourse->paginate(2, 'courses');
         $parser = \Config\Services::parser();
 
         $params = new DataParams([
@@ -33,12 +33,9 @@ class Academic extends BaseController
             'credits'   => $this->request->getGet('credits'),
             'sort' => $this->request->getGet('sort'),
             'order' => $this->request->getGet('order'),
-            'page' => $this->request->getGet('page'),
+            'page' => $this->request->getGet('page_courses'),
             'perPage' => $this->request->getGet('perPage')
         ]);
-
-
-
         $result = $this->modelCourse->getFilteredCourses($params);
 
 
