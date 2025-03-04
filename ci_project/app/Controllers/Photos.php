@@ -124,7 +124,6 @@ class Photos extends ResourceController
             'page_title' => 'User Details'
         ];
 
-        dd($dataUser);
 
         return $parser->setData($dataUser)->render('photos/index4');
 
