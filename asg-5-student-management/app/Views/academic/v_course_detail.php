@@ -5,5 +5,7 @@ Course
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+
 <?= $content ?? '' ?>
+
 <?= $this->endSection() ?>

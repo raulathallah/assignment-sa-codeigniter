@@ -41,25 +41,40 @@ class StudentModel extends Model
 
     // Validation
     protected $validationRules      = [
-        'current_semester'    => 'required|greater_than_equal_to[1]|less_than_equal_to[14]',
-        'gpa'          => 'required|greater_than_equal_to[0.00]|less_than_equal_to[4.00]',
-        'academic_status' => 'required|in_list[active, on leave, graduated]',
+        //'student_id'            => 'required|is_unique',
+        'name'                  => 'required',
+        'study_program'         => 'required',
+        'current_semester'      => 'required|greater_than_equal_to[1]|less_than_equal_to[14]',
+        'academic_status'       => 'required|in_list[active, on leave, graduated]',
+        'entry_year'            => 'required',
+        'gpa'                   => 'required|greater_than_equal_to[0.00]|less_than_equal_to[4.00]',
     ];
     protected $validationMessages   = [
+        'student_id' => [
+            'required' => 'NIM is required',
+            'is_unique' => 'NIM already exist'
+        ],
+        'study_program' => [
+            'required' => 'Study program is required',
+        ],
         'current_semester' => [
             'required' => 'Semester is required',
             'greater_than_equal_to' => 'Semester must be greater or equal to 1',
             'less_than_equal_to' => 'Semester must be lesser or equal to 14',
+        ],
+        'academic_status' => [
+            'required' => 'Academic status is required',
+            'in_list' => 'Academic status must be active, on leave, or graduated'
+        ],
+        'entry_year' => [
+            'required' => 'Entry year is required',
         ],
         'gpa' => [
             'required' => 'GPA is required',
             'greater_than_equal_to' => 'Semester must be greater or equal to 0.00',
             'less_than_equal_to' => 'Semester must be lesser or equal to 4.00',
         ],
-        'academic_status' => [
-            'required' => 'Academic status is required',
-            'in_list' => 'Academic status must be active, on leave, or graduated'
-        ]
+
     ];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;

@@ -15,7 +15,7 @@ class LatestGradesCell extends Cell
 
     public function getDataCoursesProperty()
     {
-        $table = new \CodeIgniter\View\Table();
+        //$table = new \CodeIgniter\View\Table();
 
         $dataSorted = $this->dataCourses;
         uasort($dataSorted, function ($a, $b) {
@@ -37,11 +37,10 @@ class LatestGradesCell extends Cell
             );
         }
 
-        $table->addRow(['Course Code', 'Course Name', 'Grades']);
-        foreach ($dataTable as $row) {
-            $table->addRow($row);
-        }
-
-        return $table->generate();
+        //$table->addRow(['Course Code', 'Course Name', 'Grades']);
+        //foreach ($dataTable as $row) {
+        //    $table->addRow($row);
+        //}
+        return $dataTable;
     }
 }

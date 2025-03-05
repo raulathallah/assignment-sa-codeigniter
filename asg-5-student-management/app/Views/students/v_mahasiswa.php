@@ -5,8 +5,6 @@ Mahasiswa
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-
-
 <div class="card">
   <div class="card-header fs-4">
     List Mahasiswa
@@ -87,22 +85,17 @@ Mahasiswa
         <input type="hidden" name="order" value="<?= $params->order; ?>">
 
     </form>
-
-
-
     <div class="p-3">
-
-
       <table class="table table-bordered table-striped">
-        <thead>
-          <td><a href="<?= $params->getSortUrl('nim', $baseUrl) ?>">
+        <thead class="table-dark">
+          <td><a class="text-decoration-none text-white" href="<?= $params->getSortUrl('nim', $baseUrl) ?>">
               NIM <?= $params->isSortedBy('nim') ? ($params->getSortDirection() == 'asc' ?
                     '↑' : '↓') : '↕' ?>
             </a></td>
           <td>Name</td>
           <td>Study Program</td>
           <td>GPA</td>
-          <td><a href="<?= $params->getSortUrl('current_semester', $baseUrl) ?>">
+          <td><a class="text-decoration-none text-white" href="<?= $params->getSortUrl('current_semester', $baseUrl) ?>">
               Current Semester <?= $params->isSortedBy('current_semester') ? ($params->getSortDirection() == 'asc' ?
                                   '↑' : '↓') : '↕' ?>
             </a></td>
@@ -119,5 +112,4 @@ Mahasiswa
 
   </div>
 </div>
-
 <?= $this->endSection() ?>

@@ -112,8 +112,11 @@ class Mahasiswa extends BaseController
         //     ->getResult('array');
 
 
-        $studentArray['academic_status_cell'] = view_cell('AcademicStatusCell', ['status' => $student->academic_status], DAY, 'cache_academic_status');
-        $studentArray['latest_grades_cell'] = view_cell('LatestGradesCell', ['dataCourses' => $grades], HOUR * 6, 'cache_grades_cell');
+        $studentArray['academic_status_cell'] = view_cell('AcademicStatusCell', ['status' => $student->academic_status]);
+        //, DAY, 'cache_academic_status'
+
+        $studentArray['latest_grades_cell'] = view_cell('LatestGradesCell', ['dataCourses' => $grades]);
+        //, HOUR * 6, 'cache_grades_cell'
 
         $data['content'] = $parser->setData($studentArray)->render('components/student_profile');
         return view('students/v_mahasiswa_detail', $data);
@@ -122,50 +125,55 @@ class Mahasiswa extends BaseController
     public function create(): string
     {
         $new = new Student();
-        return view('students/v_mahasiswa_form', ['type' => 'Create', 'mahasiswa' => $new]);
+        return view('students/v_mahasiswa_form', ['type' => 'Create', 'action' => 'save_add', 'mahasiswa' => $new]);
     }
 
     public function update($id): string
     {
-        //$data = $this->mhs_model->getStudentByNIM($nim);
         $data = $this->modelStudent->find($id);
-        return view('students/v_mahasiswa_form', ['type' => 'Update', 'mahasiswa' => $data]);
+        return view('students/v_mahasiswa_form', ['type' => 'Update', 'action' => 'save_update', 'mahasiswa' => $data]);
     }
 
     public function save_add()
     {
-        //$this->mhs_model->addStudent($newData);
         $data = new Student($this->request->getPost());
-        if ($this->modelStudent->save($data)) {
+        $validationRules = $this->modelStudent->getValidationRules();
+        $validationMessages = $this->modelStudent->getValidationMessages();
+        $validationRules['student_id'] = 'required|is_unique[students.student_id,id]';
 
+        if (!$this->validate($validationRules, $validationMessages)) {
+            return redirect()->back()
+                ->with('errors', $this->validator->getErrors())
+                ->withInput();
+        }
+        $store = $this->modelStudent->save($data);
+        if ($store) {
             session()->setFlashdata('success', 'Student berhasil disimpan');
-
-            return redirect()->to('/');
         }
 
-        return redirect()->back()
-            ->with('errors', $this->modelStudent->errors())
-            ->withInput();
-        return redirect()->to('/');
-
-        return redirect()->to('/');
+        return redirect()->to('/student');
     }
 
     public function save_update()
     {
-        //$this->mhs_model->updateMahasiswa($newData);
+        $id = $this->request->getPost('id');
+        $validationRules = $this->modelStudent->getValidationRules();
+        $validationMessages = $this->modelStudent->getValidationMessages();
+        $validationRules['student_id'] = 'required|is_unique[students.student_id,id,' . $id . ']';
+
+        if (!$this->validate($validationRules, $validationMessages)) {
+            return redirect()->back()
+                ->with('errors', $this->validator->getErrors())
+                ->withInput();
+        }
         $data = new Student($this->request->getPost());
-        if ($this->modelStudent->save($data)) {
 
+        $store = $this->modelStudent->save($data);
+        if ($store) {
             session()->setFlashdata('success', 'Student berhasil diubah');
-
-            return redirect()->to('/');
         }
 
-        return redirect()->back()
-            ->with('errors', $this->modelStudent->errors())
-            ->withInput();
-        return redirect()->to('/');
+        return redirect()->to('/student');
     }
 
 
@@ -173,6 +181,6 @@ class Mahasiswa extends BaseController
     {
         //$this->mhs_model->deleteMahasiswa($nim);
         $this->modelStudent->delete($id);
-        return redirect()->to('/');
+        return redirect()->to('/student');
     }
 }

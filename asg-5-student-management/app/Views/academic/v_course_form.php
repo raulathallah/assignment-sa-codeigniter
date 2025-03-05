@@ -5,21 +5,104 @@ Course
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-<div>
-    <h3><?= $type ?> Course Form</h3>
+<?php if (session('errors')) : ?>
+    <div class="alert alert-danger w-100">
+        <ul>
+            <?php foreach (session('errors') as $error) : ?>
+                <li><?= $error ?></li>
+            <?php endforeach ?>
+        </ul>
+    </div>
+<?php endif ?>
+<div class="card">
+    <div class="card-header fs-4">
+        <?= $type ?> Course Form
+    </div>
+    <div class="card-body">
+        <form action="/course/<?= $action; ?>" id="formData" method="post" style="display: grid; gap: 5px" novalidate>
+            <div class="form-element mb-3">
+                <label
+                    class="form-label"
+                    <?php if ($type == "Create"): ?>
+                    <?php else: ?>
+                    hidden
+                    <?php endif; ?>>
+                    Code
+                </label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="code"
+                    name="code"
+                    <?php if ($type == "Create"): ?>
+                    <?php else: ?>
+                    hidden
+                    <?php endif; ?>
+                    value="<?= $course->code ?>"
+                    data-pristine-required
+                    data-pristine-required-message="Code harus diisi!"
+                    data-pristine-minlength="3"
+                    data-pristine-minlength-message="Code minimal 3 karakter (client)"
+                    autofocus />
+                <?php if (session('errors')) : ?>
+                    <div class="form-text text-danger">
+                        <?= session('errors')['code'] ?>
+                    </div>
+                <?php endif ?>
+            </div>
 
-    <?php if (session('errors')) : ?>
-        <div class="alert alert-danger w-100">
-            <ul>
-                <?php foreach (session('errors') as $error) : ?>
-                    <li><?= $error ?></li>
-                <?php endforeach ?>
-            </ul>
-        </div>
-    <?php endif ?>
-    <form action="/course/<?= $action; ?>" id="formData" method="post" style="display: grid;width: fit-content; gap: 5px" novalidate>
-        <?php if ($type == "Create"): ?>
-        <?php else: ?>
+            <div class="form-element mb-3">
+                <label class="form-label">Nama</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    value="<?= $course->name  ?>"
+                    name="name"
+                    data-pristine-required
+                    data-pristine-required-message="Name harus diisi!"
+                    data-pristine-minlength="3"
+                    data-pristine-minlength-message="Name minimal 3 karakter (client)" />
+                <?php if (session('errors')) : ?>
+                    <div class="form-text text-danger">
+                        <?= session('errors')['code'] ?>
+                    </div>
+                <?php endif ?>
+            </div>
+            <div class="form-element mb-3">
+                <label class="form-label">Credits</label>
+                <input
+                    type="number"
+                    class="form-control"
+                    id="credits"
+                    value="<?= $course->credits  ?>"
+                    data-pristine-required
+                    data-pristine-required-message="Credits harus diisi!"
+                    name="credits" />
+                <?php if (session('errors')) : ?>
+                    <div class="form-text text-danger">
+                        <?= session('errors')['credits'] ?>
+                    </div>
+                <?php endif ?>
+            </div>
+
+            <div class="form-element mb-3">
+                <label class="form-label">Semester</label>
+                <input
+                    type="number"
+                    class="form-control"
+                    id="semester"
+                    value="<?= $course->semester  ?>"
+                    data-pristine-required
+                    data-pristine-required-message="Semester harus diisi!"
+                    name="semester" />
+                <?php if (session('errors')) : ?>
+                    <div class="form-text text-danger">
+                        <?= session('errors')['semester'] ?>
+                    </div>
+                <?php endif ?>
+            </div>
+
             <input
                 type="text"
                 id="id"
@@ -27,72 +110,12 @@ Course
                 hidden
                 value="<?= $course->id ?>"
                 autofocus />
-        <?php endif; ?>
 
-        <div class="form-element d-grid gap-2">
-            <label
-                <?php if ($type == "Create"): ?>
-                <?php else: ?>
-                hidden
-                <?php endif; ?>>
-                Code
-            </label>
-            <input
-                type="text"
-                id="code"
-                name="code"
-                <?php if ($type == "Create"): ?>
-                <?php else: ?>
-                hidden
-                <?php endif; ?>
-                value="<?= $course->code ?>"
-                data-pristine-required
-                data-pristine-required-message="Code harus diisi (client)"
-                data-pristine-minlength="3"
-                data-pristine-minlength-message="Code minimal 3 karakter (client)"
-                autofocus />
-            <?php if (session('errors')) : ?>
-                <div class="text-danger">
-                    <?= session('errors')['code'] ?>
-                </div>
-            <?php endif ?>
-        </div>
-
-        <div class="form-element d-grid gap-2">
-            <label>Nama</label>
-            <input
-                type="text"
-                id="name"
-                value="<?= $course->name  ?>"
-                name="name"
-                data-pristine-required
-                data-pristine-required-message="Name harus diisi (client)"
-                data-pristine-minlength="3"
-                data-pristine-minlength-message="Name minimal 3 karakter (client)" />
-            <?php if (session('errors')) : ?>
-                <div class="text-danger">
-                    <?= session('errors')['code'] ?>
-                </div>
-            <?php endif ?>
-        </div>
-
-        <label>Credits</label>
-        <input
-            type="number"
-            id="credits"
-            value="<?= $course->credits  ?>"
-            name="credits" />
-        <label>Semester</label>
-        <input
-            type="number"
-            id="semester"
-            value="<?= $course->semester  ?>"
-            name="semester" />
-        <button type="submit" class="btn btn-primary mt-3">Save</button>
-    </form>
-
-
+            <button type="submit" class="btn btn-primary" style="width: fit-content;">Save</button>
+        </form>
+    </div>
 </div>
+
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>

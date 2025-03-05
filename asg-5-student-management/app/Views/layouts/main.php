@@ -24,9 +24,10 @@
 
     <!-- Main Content -->
     <main class="d-flex h-100">
+
         <?= $this->include('components/sidebar') ?>
 
-        <div class="m-4">
+        <div class="m-4 w-100">
             <?= $this->renderSection('content') ?>
         </div>
     </main>

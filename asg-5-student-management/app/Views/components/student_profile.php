@@ -1,14 +1,18 @@
-<div>
-  <h3>Detail Mahasiswa</h3>
+<div class="card">
+  <div class="card-header fs-4">
+    Detail Mahasiswa
+  </div>
+  <div class="card-body">
+    <span class="fw-bold fs-3">{student_id} - {name}</span>
+    {!academic_status_cell!}
 
-  <div class="d-flex flex-column gap-1">
-    <span>{!academic_status_cell!}</span>
-    <span>{student_id} - {name}</span>
-    <span>{study_program}</span>
-    <span>Semester {current_semester}</span>
+    <div class="d-flex flex-column gap-1">
+      <span class="text-muted">{study_program}</span>
+      <span class="">Semester {current_semester}</span>
+    </div>
   </div>
 
-  <div class="mt-4">
+  <div class="m-3">
     <h5>Grades</h5>
     {!latest_grades_cell!}
   </div>
