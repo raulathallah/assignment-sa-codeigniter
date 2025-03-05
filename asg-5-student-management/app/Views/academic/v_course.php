@@ -76,27 +76,23 @@ Courses
 
     <div class="p-3">
       <table class="table table-bordered table-striped">
-        <thead>
-          <td><a href="<?= $params->getSortUrl('code', $baseUrl) ?>">
-              Course Code <?= $params->isSortedBy('code') ? ($params->getSortDirection() == 'asc' ?
-                            '↑' : '↓') : '' ?>
-            </a></td>
-          <td><a href="<?= $params->getSortUrl('name', $baseUrl) ?>">
-              Course Name <?= $params->isSortedBy('name') ? ($params->getSortDirection() == 'asc' ?
-                            '↑' : '↓') : '' ?>
-            </a></td>
-          <td>Credits</td>
-          <td>Semester</td>
 
-          <td>Action</td>
+        <td><a href="<?= $params->getSortUrl('code', $baseUrl) ?>">
+            Course Code <?= $params->isSortedBy('code') ? ($params->getSortDirection() == 'asc' ?
+                          '↑' : '↓') : '↕' ?>
+          </a></td>
+        <td><a href="<?= $params->getSortUrl('name', $baseUrl) ?>">
+            Course Name <?= $params->isSortedBy('name') ? ($params->getSortDirection() == 'asc' ?
+                          '↑' : '↓') : '↕' ?>
+          </a></td>
+        <td>Credits</td>
+        <td>Semester</td>
+
+        <td>Action</td>
         </thead>
         <?= $content ?? '' ?>
       </table>
-      <?= $pager->links('courses', 'custom_pager') ?>
     </div>
-
-
   </div>
 </div>
-
 <?= $this->endSection() ?>

@@ -119,8 +119,11 @@ class StudentModel extends Model
 
     public function getAllAcademicStatus()
     {
-        $academic_status = $this->select('academic_status')->distinct()->findAll();
-        return array_column($academic_status, 'academic_status');
+        //$academic_status = $this->select('academic_status')->distinct()->findAll();
+        //return array_column($academic_status, 'academic_status');
+
+
+        return ['active', 'on leave', 'graduated'];
     }
 
     public function getAllEntryYear()

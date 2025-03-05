@@ -15,7 +15,7 @@ Mahasiswa
     <a href="/student/create"><button class="btn btn-primary mb-2"><i class="bi bi-plus"></i>Add Mahasiswa</button></a>
     <form action="<?= $baseUrl ?>" method="get" class="form-inline">
       <div class="row mb-4">
-        <div class="col-md-5">
+        <div class="col-md-3">
           <div class="input-group mr-2">
             <input type="text" class="form-control" name="search"
               value="<?= $params->search ?>" placeholder="Cari code atau nama...">
@@ -24,17 +24,40 @@ Mahasiswa
             </div>
           </div>
         </div>
+
+        <!-- STUDY PROGRAM -->
         <div class="col-md-2">
           <div class="input-group ml-2">
             <select name="study_program" class="form-control" onchange="this.form.submit()">
               <option value="">All Study Program</option>
               <?php foreach ($study_program as $sp): ?>
-                <option value="<?= $sp ?>" <?= ($params->semester == $sp) ? 'selected' : '' ?>><?= ucfirst($sp) ?></option>
+                <option value="<?= $sp ?>" <?= ($params->study_program == $sp) ? 'selected' : '' ?>><?= ucfirst($sp) ?></option>
               <?php endforeach; ?>
             </select>
           </div>
         </div>
-
+        <!-- ACADEMIC STATUS -->
+        <div class="col-md-2">
+          <div class="input-group ml-2">
+            <select name="academic_status" class="form-control" onchange="this.form.submit()">
+              <option value="">All Academic Status</option>
+              <?php foreach ($academic_status as $as): ?>
+                <option value="<?= $as ?>" <?= ($params->academic_status == $as) ? 'selected' : '' ?>><?= ucfirst($as) ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </div>
+        <!-- ENTRY YEAR -->
+        <div class="col-md-2">
+          <div class="input-group ml-2">
+            <select name="entry_year" class="form-control" onchange="this.form.submit()">
+              <option value="">All Entry Year</option>
+              <?php foreach ($entry_year as $ey): ?>
+                <option value="<?= $ey ?>" <?= ($params->entry_year == $ey) ? 'selected' : '' ?>><?= ucfirst($ey) ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </div>
         <!-- ROLES -->
 
         <div class="col-md-2">
@@ -72,13 +95,19 @@ Mahasiswa
 
       <table class="table table-bordered table-striped">
         <thead>
-          <td>NIM</td>
+          <td><a href="<?= $params->getSortUrl('nim', $baseUrl) ?>">
+              NIM <?= $params->isSortedBy('nim') ? ($params->getSortDirection() == 'asc' ?
+                    '↑' : '↓') : '↕' ?>
+            </a></td>
           <td>Name</td>
           <td>Study Program</td>
           <td>GPA</td>
-          <td>Current Semester</td>
-          <!--  <td>Academic Status</td> -->
+          <td><a href="<?= $params->getSortUrl('current_semester', $baseUrl) ?>">
+              Current Semester <?= $params->isSortedBy('current_semester') ? ($params->getSortDirection() == 'asc' ?
+                                  '↑' : '↓') : '↕' ?>
+            </a></td>
           <td>Entry Year</td>
+          <td>Academic Status</td>
           <td>Action</td>
         </thead>
         <?= $content ?? '' ?>
