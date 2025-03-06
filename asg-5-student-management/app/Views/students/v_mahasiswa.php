@@ -16,7 +16,7 @@ Mahasiswa
         <div class="col-md-3">
           <div class="input-group mr-2">
             <input type="text" class="form-control" name="search"
-              value="<?= $params->search ?>" placeholder="Cari code atau nama...">
+              value="<?= $params->search ?>" placeholder="Cari...">
             <div class="input-group-append">
               <button class="btn btn-secondary" type="submit">Cari</button>
             </div>
