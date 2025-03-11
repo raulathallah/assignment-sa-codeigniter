@@ -87,10 +87,10 @@ phpunit
 vendor/*
 # Unignore the myth folder
 !vendor/myth/
+vendor/myth/*
 # Unignore the auth folder specifically inside myth
 !vendor/myth/auth/
-# Now we can safely exclude other parts of vendor/myth
-vendor/myth/*
+!vendor/myth/auth/**
 
 #-------------------------
 # IDE / Development Files
