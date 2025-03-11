@@ -89,8 +89,6 @@ vendor/*
 !vendor/myth/
 # Unignore the auth folder specifically inside myth
 !vendor/myth/auth/
-# Now we can safely exclude other parts of vendor/myth
-vendor/myth/*
 
 #-------------------------
 # IDE / Development Files
