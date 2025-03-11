@@ -85,7 +85,7 @@ Mahasiswa
         <input type="hidden" name="order" value="<?= $params->order; ?>">
 
     </form>
-    <div class="p-3">
+    <div class="table-responsive p-3">
       <table class="table table-bordered table-striped">
         <thead class="table-dark">
           <td><a class="text-decoration-none text-white" href="<?= $params->getSortUrl('nim', $baseUrl) ?>">

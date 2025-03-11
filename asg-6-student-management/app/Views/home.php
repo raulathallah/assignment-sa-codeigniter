@@ -6,7 +6,14 @@ Home
 
 <?= $this->section('content') ?>
 <?php if (logged_in()): ?>
-    Welcome, <?= user()->username; ?>!
+    <p>Welcome, <?= user()->username; ?>!</p>
+
+
+    <?php if (!empty(user()->getRoles())): ?>
+        <?php foreach (user()->getRoles() as $role): ?>
+            <p>Role: <span class="fw-bold"><?= $role ?></span></p>
+        <?php endforeach; ?>
+    <?php endif; ?>
 <?php else: ?>
     Home
 <?php endif; ?>

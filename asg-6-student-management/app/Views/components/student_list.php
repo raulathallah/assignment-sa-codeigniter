@@ -20,9 +20,9 @@
     -->
 
   <td>
-    <a class="btn btn-outline-primary" href="/student/detail/{id}">Detail</a>
-    <a class="btn btn-outline-warning" href="/student/edit/{id}">Edit</a>
-    <a class="btn btn-outline-danger" href="/student/delete/{id}">Delete</a>
+    <a class="btn btn-sm btn-primary" href="/student/detail/{id}">Detail</a>
+    <a class="btn btn-sm btn-warning" href="/student/edit/{id}">Edit</a>
+    <a class="btn btn-sm btn-danger" href="/student/delete/{id}">Delete</a>
   </td>
 </tr>
 {/students}

@@ -1,4 +1,4 @@
-<div class="mh-100 custom-primary" style=" width: 15%;">
+<div class="mh-100 custom-primary" style=" width: 13%;">
   <ul class="list-group list-group-flush gap-2 p-1">
     <?php if (logged_in()): ?>
       <li class="">
@@ -12,6 +12,11 @@
           <a class="fs-6 btn btn-link text-white text-decoration-none text-start w-100" href="/student">
             <i class="me-2 bi bi-people-fill">
             </i>Mahasiswa</a>
+        </li>
+        <li class="">
+          <a class="fs-6 btn btn-link text-white text-decoration-none text-start w-100" href="/admin/users">
+            <i class="me-2 bi bi-gear-fill">
+            </i>User Management</a>
         </li>
       <?php endif; ?>
 

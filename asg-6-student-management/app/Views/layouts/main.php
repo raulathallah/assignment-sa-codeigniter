@@ -47,7 +47,7 @@
 
         <?= $this->include('components/sidebar') ?>
 
-        <div class="m-4 w-100">
+        <div class="mx-5 my-4 w-100">
             <?= $this->renderSection('content') ?>
         </div>
     </main>
