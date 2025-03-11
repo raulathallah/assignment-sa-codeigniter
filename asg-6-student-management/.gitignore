@@ -84,9 +84,9 @@ phpunit
 #-------------------------
 # Composer
 #-------------------------
+vendor/myth/auth/
 vendor/*
 !vendor/myth/
-vendor/myth/*
 !vendor/myth/auth/
 
 #-------------------------
