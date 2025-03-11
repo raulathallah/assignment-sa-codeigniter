@@ -54,7 +54,7 @@ Edit User
             </div>
 
 
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <label for="group" class="form-label">Grup</label>
                 <select class="form-select <?= (session('errors.group')) ? 'is-invalid' : ''; ?>" id="group" name="group" required>
                     <option value="">Pilih Grup</option>
@@ -72,7 +72,7 @@ Edit User
                 <div class="invalid-feedback">
                     <?= session('errors.group'); ?>
                 </div>
-            </div>
+            </div> -->
 
             <div class="mb-3">
                 <div class="form-check">

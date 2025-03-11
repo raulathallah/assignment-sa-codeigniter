@@ -30,7 +30,8 @@
         }
 
         .custom-footer {
-            background-color: black;
+            background-color: #121212;
+            text-align: center;
         }
     </style>
 

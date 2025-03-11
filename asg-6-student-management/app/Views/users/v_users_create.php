@@ -19,7 +19,7 @@ Edit Create
         <?= $title; ?>
     </div>
     <div class="card-body">
-        <form action="<?= base_url('admin/users/update/' . $user->id); ?>" method="post">
+        <form action="<?= base_url('admin/users/store'); ?>" method="post">
             <?= csrf_field(); ?>
 
             <div class="mb-3">

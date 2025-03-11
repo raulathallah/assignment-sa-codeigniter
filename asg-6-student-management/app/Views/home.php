@@ -8,12 +8,16 @@ Home
 <?php if (logged_in()): ?>
     <p>Welcome, <?= user()->username; ?>!</p>
 
-
     <?php if (!empty(user()->getRoles())): ?>
-        <?php foreach (user()->getRoles() as $role): ?>
-            <p>Role: <span class="fw-bold"><?= $role ?></span></p>
-        <?php endforeach; ?>
+        <span>Roles</span>
+        <ul>
+            <?php foreach (user()->getRoles() as $role): ?>
+                <li><span class="fw-bold"><?= $role ?></span></li>
+            <?php endforeach; ?>
+        </ul>
+
     <?php endif; ?>
+
 <?php else: ?>
     Home
 <?php endif; ?>

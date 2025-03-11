@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
+use Myth\Auth\Entities\User;
 use Myth\Auth\Models\GroupModel;
 use Myth\Auth\Models\UserModel;
 
@@ -148,7 +149,6 @@ class Users extends BaseController
         }
         // Update data user
         $data = [
-
             'id' => $id,
             'username' => $newUsername,
             'email' => $newEmail,
@@ -160,20 +160,22 @@ class Users extends BaseController
             $data['password'] = $password;
         }
 
+        $dataUserObject = new User($data);
+
         // Simpan perubahan
-        $this->userModel->save($data);
+        $this->userModel->save($dataUserObject);
 
         // Update group user
-        $groupId = $this->request->getVar('group');
-        if (!empty($groupId)) {
-            $currentGroups = $this->groupModel->getGroupsForUser($id);
-            // Hapus dari group lama
-            foreach ($currentGroups as $group) {
-                $this->groupModel->removeUserFromGroup($id, $group['group_id']);
-            }
-            // Tambahkan ke group baru
-            $this->groupModel->addUserToGroup($id, $groupId);
-        }
+        // $groupId = $this->request->getVar('group');
+        // if (!empty($groupId)) {
+        //     $currentGroups = $this->groupModel->getGroupsForUser($id);
+        //     // Hapus dari group lama
+        //     foreach ($currentGroups as $group) {
+        //         $this->groupModel->removeUserFromGroup($id, $group['group_id']);
+        //     }
+        //     // Tambahkan ke group baru
+        //     $this->groupModel->addUserToGroup($id, $groupId);
+        // }
 
         return redirect()->to('admin/users')->with('message', 'User berhasil diupdate');
     }
