@@ -84,12 +84,8 @@ phpunit
 #-------------------------
 # Composer
 #-------------------------
-# Unignore the `myth` folder first, then the `auth` folder.
-!vendor/myth/
-!vendor/myth/auth/
-
-# Now ignore the rest of the `vendor/` folder
 vendor/*
+!vendor/myth/
 vendor/myth/*
 !vendor/myth/auth/
 
