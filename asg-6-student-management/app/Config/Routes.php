@@ -1,6 +1,7 @@
 <?php
 
 use App\Controllers\Academic;
+use App\Controllers\Enrollment;
 use App\Controllers\Home;
 use App\Controllers\Mahasiswa;
 use App\Controllers\Users;
@@ -25,6 +26,11 @@ $routes->group('', ['filter' => 'role:student'], function ($routes) {
     $routes->get('my-profile', [Mahasiswa::class, 'detailProfile']);
 });
 
+$routes->group('enrollments', ['filter' => 'role:student'], function ($routes) {
+    $routes->get('/', 'Enrollment::index');
+    $routes->get('create', 'Enrollment::create');
+});
+
 $routes->group('admin/users', ['filter' => 'role:admin'], function ($routes) {
     $routes->get('/', 'Users::index');
     $routes->get('create', 'Users::create');
@@ -37,7 +43,7 @@ $routes->group('admin/users', ['filter' => 'role:admin'], function ($routes) {
 });
 
 $routes->group('student', ['filter' => 'role:admin'], function ($routes) {
-    $routes->get('', [Mahasiswa::class, 'index']);
+    $routes->get('/', [Mahasiswa::class, 'index']);
     $routes->get('detail/(:any)', [Mahasiswa::class, 'detail']);
     $routes->get('create', [Mahasiswa::class, 'create']);
     $routes->get('edit/(:num)', [Mahasiswa::class, 'update']);
@@ -47,7 +53,7 @@ $routes->group('student', ['filter' => 'role:admin'], function ($routes) {
 });
 
 $routes->group('course', ['filter' => 'role:lecturer'], function ($routes) {
-    $routes->get('', [Academic::class, 'index']);
+    $routes->get('/', [Academic::class, 'index']);
     $routes->get('detail/(:any)', [Academic::class, 'getCourseDetail']);
     $routes->get('create', [Academic::class, 'createCourse']);
     $routes->get('edit/(:num)', [Academic::class, 'updateCourse']);

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Libraries\DataParams;
 use CodeIgniter\Model;
 
 class EnrollmentModel extends Model
@@ -50,4 +51,27 @@ class EnrollmentModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getFilteredEnrollments(DataParams $params)
+    {
+        if (!empty($params->search)) { // Apply search
+            $this->groupStart()
+                ->like('code', $params->search, 'both', null, true)
+                ->orLike('name', $params->search, 'both', null, true)
+                ->groupEnd();
+        }
+
+        // Apply sort
+        // $allowedSortColumns = ['code', 'name'];
+        // $sort = in_array($params->sort, $allowedSortColumns) ? $params->sort : 'id';
+        // $order = ($params->order === 'desc') ? 'desc' : 'asc';
+        // $this->orderBy($sort, $order);
+
+        $result = [
+            'enrollments' => $this->paginate($params->perPage, 'enrollments', $params->page),
+            'pager' => $this->pager,
+            'total' => $this->countAllResults(false)
+        ];
+        return $result;
+    }
 }
