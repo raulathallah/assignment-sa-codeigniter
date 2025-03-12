@@ -13,17 +13,17 @@ class StudentModel extends Model
 
     //protected $returnType       = 'object';
     protected $returnType       = \App\Entities\Student::class;
-
-    protected $useSoftDeletes   = false;
+    protected $useSoftDeletes   = true;
     protected $protectFields    = true;
     protected $allowedFields    = [
         'student_id',
         'name',
+        'user_id',
         'study_program',
         'current_semester',
         'academic_status',
         'entry_year',
-        'gpa'
+        'gpa',
     ];
 
     protected bool $allowEmptyInserts = false;
@@ -37,7 +37,7 @@ class StudentModel extends Model
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-    //protected $deletedField  = 'deleted_at';
+    protected $deletedField  = 'deleted_at';
 
     // Validation
     protected $validationRules      = [

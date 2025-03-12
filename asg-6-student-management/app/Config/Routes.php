@@ -3,6 +3,7 @@
 use App\Controllers\Academic;
 use App\Controllers\Home;
 use App\Controllers\Mahasiswa;
+use App\Controllers\Users;
 use CodeIgniter\Router\RouteCollection;
 
 /**
@@ -53,4 +54,10 @@ $routes->group('course', ['filter' => 'role:lecturer'], function ($routes) {
     $routes->post('save_add', [Academic::class, 'course_save_add']);
     $routes->post('save_update', [Academic::class, 'course_save_update']);
     $routes->get('delete/(:any)', [Academic::class, 'deleteCourse']);
+});
+
+$routes->group('dashboard', ['namespace' => 'App\Controllers'], function ($routes) {
+    $routes->get('student', [Home::class, 'dashboardStudent']);
+    $routes->get('admin', [Home::class, 'dashboardAdmin']);
+    $routes->get('lecturer', [Home::class, 'dashboardLecturer']);
 });

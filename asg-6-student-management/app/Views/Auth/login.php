@@ -8,7 +8,7 @@ Login
     <div class="row">
         <div class="col-sm-6 offset-sm-3">
             <div class="card">
-                <h2 class="card-header"><?= lang('Auth.loginTitle') ?> (Custom)</h2>
+                <h2 class="card-header"><?= lang('Auth.loginTitle') ?></h2>
                 <div class="card-body">
                     <?= view('Myth\Auth\Views\_message_block') ?>
 
@@ -43,14 +43,14 @@ Login
                             </div>
                         </div>
 
-                        <?php if ($config->allowRemembering): ?>
+                        <!-- <?php if ($config->allowRemembering): ?>
                             <div class="form-check">
                                 <label class="form-check-label">
                                     <input type="checkbox" name="remember" class="form-check-input" <?php if (old('remember')) : ?> checked <?php endif ?>>
                                     <?= lang('Auth.rememberMe') ?>
                                 </label>
                             </div>
-                        <?php endif; ?>
+                        <?php endif; ?> -->
 
                         <br>
 

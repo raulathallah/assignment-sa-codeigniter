@@ -20,7 +20,8 @@ class StudentsSeeder extends Seeder
                 'entry_year'            => '2025',
                 'gpa'                   => 3.56,
                 'created_at'            => new Time(),
-                'updated_at'            => new Time(),
+                'updated_at'            => null,
+                'deleted_at'            => null,
             ],
             [
                 'student_id'            => '2301893244',
@@ -31,7 +32,8 @@ class StudentsSeeder extends Seeder
                 'entry_year'            => '2025',
                 'gpa'                   => 3.22,
                 'created_at'            => new Time(),
-                'updated_at'            => new Time(),
+                'updated_at'            => null,
+                'deleted_at'            => null,
             ],
             [
                 'student_id'            => '2301894421',
@@ -42,7 +44,8 @@ class StudentsSeeder extends Seeder
                 'entry_year'            => '2023',
                 'gpa'                   => 3.77,
                 'created_at'            => new Time(),
-                'updated_at'            => new Time(),
+                'updated_at'            => null,
+                'deleted_at'            => null,
             ],
             [
                 'student_id'            => '23018941113',
@@ -53,7 +56,8 @@ class StudentsSeeder extends Seeder
                 'entry_year'            => '2021',
                 'gpa'                   => 3.42,
                 'created_at'            => new Time(),
-                'updated_at'            => new Time(),
+                'updated_at'            => null,
+                'deleted_at'            => null,
             ],
         ];
         $this->db->table('students')->insertBatch($data);
