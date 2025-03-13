@@ -72,7 +72,7 @@ Register
                             </select>
                         </div> -->
 
-                        <!-- <h5 class="mt-3">Student Information</h5>
+                        <h5 class="mt-3">Student Information</h5>
 
                         <div class="row row-cols-2">
                             <div class="col">
@@ -179,7 +179,7 @@ Register
 
                             </div>
 
-                        </div> -->
+                        </div>
 
                         <br>
 

@@ -18,6 +18,10 @@
             <i class="me-2 bi bi-gear-fill">
             </i>User Management</a>
         </li>
+        <li class="">
+          <a class="fs-6 btn btn-link text-white text-decoration-none text-start w-100" href="/admin/enrollments">
+            <i class="me-2 bi bi-archive-fill"></i></i>Enrollments</a>
+        </li>
       <?php endif; ?>
 
 
@@ -40,7 +44,7 @@
             <i class="me-2 bi bi-person-circle"></i>My Profile</a>
         </li>
         <li class="">
-          <a class="fs-6 btn btn-link text-white text-decoration-none text-start w-100" href="/enrollments  ">
+          <a class="fs-6 btn btn-link text-white text-decoration-none text-start w-100" href="/enrollments">
             <i class="me-2 bi bi-archive-fill"></i></i>Enrollments</a>
         </li>
         <li class="">

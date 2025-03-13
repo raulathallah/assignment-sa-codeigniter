@@ -54,10 +54,24 @@ class EnrollmentModel extends Model
 
     public function getFilteredEnrollments(DataParams $params)
     {
+
+        $enrollmentsData = $this
+            ->select('
+                enrollments.id as id,
+                students.name as studentName,
+                courses.name as courseName,
+                enrollments.status,
+                enrollments.academic_year,
+                enrollments.semester
+            ')
+            ->join('students', 'enrollments.student_id = students.id')
+            ->join('courses', 'enrollments.course_id = courses.id')
+            ->where('students.user_id', user()->id);
+
         if (!empty($params->search)) { // Apply search
-            $this->groupStart()
-                ->like('code', $params->search, 'both', null, true)
-                ->orLike('name', $params->search, 'both', null, true)
+            $enrollmentsData->groupStart()
+                ->like('students.name', $params->search, 'both', null, true)
+                ->orLike('courses.name', $params->search, 'both', null, true)
                 ->groupEnd();
         }
 
@@ -68,9 +82,9 @@ class EnrollmentModel extends Model
         // $this->orderBy($sort, $order);
 
         $result = [
-            'enrollments' => $this->paginate($params->perPage, 'enrollments', $params->page),
-            'pager' => $this->pager,
-            'total' => $this->countAllResults(false)
+            'enrollments' => $enrollmentsData->paginate($params->perPage, 'enrollments', $params->page),
+            'pager' => $enrollmentsData->pager,
+            'total' => $enrollmentsData->countAllResults(false)
         ];
         return $result;
     }

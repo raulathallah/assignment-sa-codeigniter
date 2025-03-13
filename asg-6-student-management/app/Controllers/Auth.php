@@ -43,38 +43,38 @@ class Auth extends AuthController
     public function attemptRegister()
     {
         // Jalankan registrasi bawaan
-        parent::attemptRegister();
+        $store = parent::attemptRegister();
         $email = $this->request->getPost('email');
 
         //$roleGroup = $this->request->getPost('role_group');
-        $roleGroup = 'lecturer';
+        $roleGroup = 'student';
 
         $user = $this->userModel->where('email', $email)->first();
 
-        // $new = [
-        //     'student_id'        => $this->request->getPost('student_id'),
-        //     'user_id'           => $user->id,
-        //     'name'              => $this->request->getPost('name'),
-        //     'study_program'     => $this->request->getPost('study_program'),
-        //     'current_semester'  => $this->request->getPost('current_semester'),
-        //     'academic_status'   => $this->request->getPost('academic_status'),
-        //     'entry_year'        => $this->request->getPost('entry_year'),
-        //     'gpa'               => $this->request->getPost('gpa'),
-        // ];
+        $new = [
+            'student_id'        => $this->request->getPost('student_id'),
+            'user_id'           => $user->id,
+            'name'              => $this->request->getPost('name'),
+            'study_program'     => $this->request->getPost('study_program'),
+            'current_semester'  => $this->request->getPost('current_semester'),
+            'academic_status'   => $this->request->getPost('academic_status'),
+            'entry_year'        => $this->request->getPost('entry_year'),
+            'gpa'               => $this->request->getPost('gpa'),
+        ];
 
-        // $data = new Student($new);
+        $data = new Student($new);
 
-        // $validationRules = $this->studentModel->getValidationRules();
-        // $validationMessages = $this->studentModel->getValidationMessages();
-        // $validationRules['student_id'] = 'required|is_unique[students.student_id]';
+        $validationRules = $this->studentModel->getValidationRules();
+        $validationMessages = $this->studentModel->getValidationMessages();
+        $validationRules['student_id'] = 'required|is_unique[students.student_id]';
 
-        // if (!$this->validate($validationRules, $validationMessages)) {
-        //     return redirect()->back()
-        //         ->with('errors', $this->validator->getErrors())
-        //         ->withInput();
-        // }
+        if (!$this->validate($validationRules, $validationMessages)) {
+            return redirect()->back()
+                ->with('errors', $this->validator->getErrors())
+                ->withInput();
+        }
 
-        // $this->studentModel->save($data);
+        $this->studentModel->save($data);
 
         if ($user) {
             // Tambahkan ke group student

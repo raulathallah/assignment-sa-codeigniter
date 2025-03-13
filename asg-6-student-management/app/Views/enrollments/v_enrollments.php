@@ -10,7 +10,9 @@ Enrollments
     List Enrollments
   </div>
   <div class="card-body">
-    <a href="/enrollments/create"><button class="btn btn-primary mb-2"><i class="bi bi-plus"></i>Add Enrollments</button></a>
+    <?php if ($type == 'admin'): ?>
+      <a href="/admin/enrollments/create"><button class="btn btn-primary mb-2"><i class="bi bi-plus"></i>Add Enrollments</button></a>
+    <?php endif; ?>
 
     <form action="<?= $baseUrl ?>" method="get" class="form-inline">
       <div class="row mb-4">
@@ -57,35 +59,39 @@ Enrollments
       <table class="table table-bordered table-striped">
         <thead class="table-dark">
           <td>ID</td>
-          <td>NIM</td>
+          <td>Name</td>
           <td>Course</td>
           <td>Academic Year</td>
           <td>Semester</td>
           <td>Status</td>
+
+          <?php if ($type == 'admin'): ?>
+            <td>Action</td>
+
+          <?php endif; ?>
         </thead>
         <tbody>
           <?php foreach ($enrollments as $row) : ?>
             <tr>
               <td><?= $row->id; ?></td>
-              <td><?= $row->student_id; ?></td>
-              <td><?= $row->course_id; ?></td>
-              <!-- <td>
-                <?php if ($row->status == 1) : ?>
+              <td><?= $row->studentName; ?></td>
+              <td><?= $row->courseName; ?></td>
+              <td><?= $row->academic_year; ?></td>
+              <td><?= $row->semester; ?></td>
+              <td>
+                <?php if ($row->status == 'active') : ?>
                   <span class="badge bg-success">Active</span>
                 <?php else : ?>
                   <span class="badge bg-danger">Inactive</span>
                 <?php endif; ?>
-              </td> -->
+              </td>
 
-              <!-- <td>
-                <a href="<?= base_url('admin/users/edit/' . $user->id); ?>" class="btn btn-sm btn-warning">Edit</a>
-                <form action="<?= base_url('admin/users/delete/' . $user->id); ?>" method="post" class="d-inline" onsubmit="return confirm('Are you sure to delete this user?')">
-                  <?= csrf_field(); ?>
-                  <input type="hidden" name="_method" value="DELETE">
-                  <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                </form>
-                <a href="<?= base_url('admin/users/addToGroup/' . $user->id); ?>" class="btn btn-sm btn-info">Add to Group</a>
-              </td> -->
+              <?php if ($type == 'admin'): ?>
+                <td>
+                  <a class="btn btn-sm btn-danger" href="/student/delete/{id}">Delete</a>
+                </td>
+              <?php endif; ?>
+
             </tr>
 
           <?php endforeach; ?>

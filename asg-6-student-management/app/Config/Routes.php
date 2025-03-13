@@ -28,7 +28,12 @@ $routes->group('', ['filter' => 'role:student'], function ($routes) {
 
 $routes->group('enrollments', ['filter' => 'role:student'], function ($routes) {
     $routes->get('/', 'Enrollment::index');
+});
+
+$routes->group('admin/enrollments', ['filter' => 'role:admin'], function ($routes) {
+    $routes->get('/', 'Enrollment::index');
     $routes->get('create', 'Enrollment::create');
+    $routes->post('store', 'Enrollment::store');
 });
 
 $routes->group('admin/users', ['filter' => 'role:admin'], function ($routes) {
