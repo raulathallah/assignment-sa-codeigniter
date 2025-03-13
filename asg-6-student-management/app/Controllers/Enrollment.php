@@ -89,4 +89,15 @@ class Enrollment extends BaseController
         session()->setFlashdata('success', 'Enrollments berhasil disimpan');
         return redirect()->to('admin/enrollments');
     }
+
+    public function delete($id)
+    {
+        $enrollment = $this->modelEnrollment->find($id);
+        if (empty($enrollment)) {
+            return redirect()->to('admin/enrollments')->with('error', 'Enrollment tidak ditemukan');
+        }
+
+        $this->modelEnrollment->delete($id);
+        return redirect()->to('admin/enrollments')->with('message', 'Enrollment berhasil dihapus');
+    }
 }

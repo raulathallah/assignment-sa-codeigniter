@@ -54,6 +54,13 @@ class EnrollmentModel extends Model
 
     public function getFilteredEnrollments(DataParams $params)
     {
+        $isAdmin = 0;
+
+        foreach (user()->getRoles() as $role) {
+            if ($role == 'admin') {
+                $isAdmin++;
+            }
+        }
 
         $enrollmentsData = $this
             ->select('
@@ -65,8 +72,11 @@ class EnrollmentModel extends Model
                 enrollments.semester
             ')
             ->join('students', 'enrollments.student_id = students.id')
-            ->join('courses', 'enrollments.course_id = courses.id')
-            ->where('students.user_id', user()->id);
+            ->join('courses', 'enrollments.course_id = courses.id');
+
+        if ($isAdmin == 0) {
+            $enrollmentsData->where('students.user_id', user()->id);
+        }
 
         if (!empty($params->search)) { // Apply search
             $enrollmentsData->groupStart()

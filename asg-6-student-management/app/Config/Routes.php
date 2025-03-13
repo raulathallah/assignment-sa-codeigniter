@@ -34,6 +34,7 @@ $routes->group('admin/enrollments', ['filter' => 'role:admin'], function ($route
     $routes->get('/', 'Enrollment::index');
     $routes->get('create', 'Enrollment::create');
     $routes->post('store', 'Enrollment::store');
+    $routes->get('delete/(:num)', 'Enrollment::delete/$1');
 });
 
 $routes->group('admin/users', ['filter' => 'role:admin'], function ($routes) {

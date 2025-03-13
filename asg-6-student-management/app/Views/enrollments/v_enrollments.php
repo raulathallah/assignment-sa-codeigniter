@@ -88,7 +88,7 @@ Enrollments
 
               <?php if ($type == 'admin'): ?>
                 <td>
-                  <a class="btn btn-sm btn-danger" href="/student/delete/{id}">Delete</a>
+                  <a class="btn btn-sm btn-danger" href="/admin/enrollments/delete/<?= $row->id; ?>">Delete</a>
                 </td>
               <?php endif; ?>
 
