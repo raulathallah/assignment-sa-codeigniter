@@ -30,15 +30,6 @@ class Enrollment extends BaseController
 
     public function index()
     {
-
-        $isAdmin = 0;
-
-        foreach (user()->getRoles() as $role) {
-            if ($role == 'admin') {
-                $isAdmin++;
-            }
-        }
-
         //
         $params = new DataParams([
             'search' => $this->request->getGet('search'),
@@ -54,8 +45,8 @@ class Enrollment extends BaseController
             'pager' => $result['pager'],
             'total' => $result['total'],
             'params' => $params,
-            'baseUrl' => $isAdmin == 1 ? base_url('admin/enrollments') : base_url('enrollments'),
-            'type' => $isAdmin == 1 ? 'admin' : ''
+            'baseUrl' => in_groups('admin') ? base_url('admin/enrollments') : base_url('enrollments'),
+            'type' => in_groups('admin') == 1 ? 'admin' : ''
         ];
 
         return view('enrollments/v_enrollments', $data);
