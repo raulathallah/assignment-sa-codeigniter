@@ -59,9 +59,6 @@ Register
                         </div>
 
 
-
-
-
                         <!-- <div class="form-group">
                             <label for="role_group">Role</label>
                             <select class="form-select" id="role_group" name="role_group" aria-label="Default select example">
