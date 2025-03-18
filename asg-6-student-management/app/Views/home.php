@@ -19,7 +19,7 @@ Home
     <?php endif; ?>
 
 <?php else: ?>
-    Home
+    <h2>Home Page</h2>
 <?php endif; ?>
 
 <?= $this->endSection() ?>

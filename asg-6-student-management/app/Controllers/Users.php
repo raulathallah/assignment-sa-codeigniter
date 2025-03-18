@@ -119,7 +119,7 @@ class Users extends BaseController
 
         if (!$user) {
 
-            return redirect()->to('/users')->with('error', 'User tidak ditemukan');
+            return redirect()->to('admin/users')->with('error', 'User tidak ditemukan');
         }
 
         // Periksa username unik jika diubah
@@ -184,7 +184,7 @@ class Users extends BaseController
     {
         $user = $this->userModel->find($id);
         if (empty($user)) {
-            return redirect()->to('/users')->with('error', 'User tidak ditemukan');
+            return redirect()->to('admin/users')->with('error', 'User tidak ditemukan');
         }
 
         $this->userModel->delete($id);

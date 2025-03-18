@@ -44,11 +44,6 @@ Course
                     data-pristine-minlength="3"
                     data-pristine-minlength-message="Code minimal 3 karakter (client)"
                     autofocus />
-                <?php if (session('errors')) : ?>
-                    <div class="form-text text-danger">
-                        <?= session('errors')['code'] ?>
-                    </div>
-                <?php endif ?>
             </div>
 
             <div class="form-element mb-3">
@@ -63,11 +58,6 @@ Course
                     data-pristine-required-message="Name harus diisi!"
                     data-pristine-minlength="3"
                     data-pristine-minlength-message="Name minimal 3 karakter (client)" />
-                <?php if (session('errors')) : ?>
-                    <div class="form-text text-danger">
-                        <?= session('errors')['code'] ?>
-                    </div>
-                <?php endif ?>
             </div>
             <div class="form-element mb-3">
                 <label class="form-label">Credits</label>
@@ -79,11 +69,6 @@ Course
                     data-pristine-required
                     data-pristine-required-message="Credits harus diisi!"
                     name="credits" />
-                <?php if (session('errors')) : ?>
-                    <div class="form-text text-danger">
-                        <?= session('errors')['credits'] ?>
-                    </div>
-                <?php endif ?>
             </div>
 
             <div class="form-element mb-3">
@@ -96,11 +81,6 @@ Course
                     data-pristine-required
                     data-pristine-required-message="Semester harus diisi!"
                     name="semester" />
-                <?php if (session('errors')) : ?>
-                    <div class="form-text text-danger">
-                        <?= session('errors')['semester'] ?>
-                    </div>
-                <?php endif ?>
             </div>
 
             <input

@@ -8,11 +8,15 @@ use App\Libraries\DataParams;
 use App\Models\M_Mahasiswa as ModelsMahasiswa;
 use App\Models\StudentGradeModel;
 use App\Models\StudentModel;
+use CodeIgniter\I18n\Time;
+use Myth\Auth\Models\UserModel;
 
 class Mahasiswa extends BaseController
 {
     private $modelStudent;
     private $modelGrades;
+
+    private $modelUser;
 
     protected $db;
     private $baseUrlRoutes = '/student';
@@ -24,6 +28,7 @@ class Mahasiswa extends BaseController
 
         $this->modelStudent = new StudentModel();
         $this->modelGrades = new StudentGradeModel();
+        $this->modelUser = new UserModel();
     }
 
     public function index(): string
@@ -133,7 +138,7 @@ class Mahasiswa extends BaseController
     {
         $id = user_id();
         $parser = \Config\Services::parser();
-        $student = $this->modelStudent->find($id);
+        $student = $this->modelStudent->where('user_id', $id)->first();
 
         $gradesTable = $this->db->table('student_grades');
         $gradesTable
@@ -172,19 +177,22 @@ class Mahasiswa extends BaseController
     public function save_add()
     {
         $data = new Student($this->request->getPost());
+        $data->id = null;
         $validationRules = $this->modelStudent->getValidationRules();
         $validationMessages = $this->modelStudent->getValidationMessages();
-        $validationRules['student_id'] = 'required|is_unique[students.student_id,id]';
+        $validationRules['student_id'] = 'required|is_unique[students.student_id]';
 
         if (!$this->validate($validationRules, $validationMessages)) {
             return redirect()->back()
                 ->with('errors', $this->validator->getErrors())
                 ->withInput();
         }
+
         $store = $this->modelStudent->save($data);
 
-        if (! $store) {
-            dd($store);
+        if (!$store) {
+            // Output any error (like if save failed)
+            dd($this->modelStudent->errors());
         }
 
         session()->setFlashdata('success', 'Student berhasil disimpan');

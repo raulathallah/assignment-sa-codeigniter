@@ -19,6 +19,10 @@ class CreateStudentsTable extends Migration
                 'type'          => 'VARCHAR',
                 'constraint'    => '255'
             ],
+            'user_id' => [
+                'type'          => 'INT',
+                'default'       => null
+            ],
             'name' => [
                 'type'          => 'VARCHAR',
                 'constraint'    => '255'
@@ -42,15 +46,28 @@ class CreateStudentsTable extends Migration
                 'type'          => 'VARCHAR',
                 'constraint'    => '255'
             ],
-            'created_at' => [
-                'type'          => 'timestamp'
+            'created_at'        => [
+                'type'           => 'DATETIME',
+                'null'           => false,
+                //'default'        => 'CURRENT_TIMESTAMP',
             ],
-            'updated_at' => [
-                'type'          => 'timestamp'
+            'updated_at'        => [
+                'type'           => 'DATETIME',
+                'null'           => false,
+                //'default'        => 'CURRENT_TIMESTAMP',
+            ],
+            'deleted_at'        => [
+                'type'           => 'DATETIME',
+                'null'           => true,
+                'default'        => null,
             ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('students');
+
+        $db = \Config\Database::connect();
+        $db->query('ALTER TABLE "students" ALTER COLUMN "created_at" SET DEFAULT CURRENT_TIMESTAMP');
+        $db->query('ALTER TABLE "students" ALTER COLUMN "updated_at" SET DEFAULT CURRENT_TIMESTAMP');
     }
 
     public function down()

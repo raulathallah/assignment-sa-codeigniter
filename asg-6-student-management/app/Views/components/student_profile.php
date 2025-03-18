@@ -13,7 +13,7 @@
   </div>
 
   <div class="m-3">
-    <h5>Enrollments & Grades</h5>
+    <h5>Grades</h5>
     {!latest_grades_cell!}
   </div>
 

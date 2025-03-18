@@ -84,13 +84,7 @@ phpunit
 #-------------------------
 # Composer
 #-------------------------
-vendor/*
-# Unignore the myth folder
-!vendor/myth/
-vendor/myth/*
-# Unignore the auth folder specifically inside myth
-!vendor/myth/auth/
-!vendor/myth/auth/**
+vendor/
 
 #-------------------------
 # IDE / Development Files

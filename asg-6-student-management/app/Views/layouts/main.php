@@ -33,6 +33,11 @@
             background-color: #121212;
             text-align: center;
         }
+
+        main {
+            /* Adjust the main content's left margin to avoid sidebar overlap */
+            flex-grow: 1;
+        }
     </style>
 
 </head>
@@ -44,14 +49,15 @@
     </header>
 
     <!-- Main Content -->
-    <main class="d-flex h-100">
+    <main class="d-flex ">
 
         <?= $this->include('components/sidebar') ?>
 
-        <div class="mx-5 my-4 w-100">
+        <div class="mx-5 my-4 w-100 h-100">
             <?= $this->renderSection('content') ?>
         </div>
     </main>
+
     <!-- Footer -->
     <?= $this->include('components/footer') ?>
 

@@ -97,6 +97,7 @@ class Academic extends BaseController
     {
         //$this->mhs_model->addStudent($newData);
         $data = new Course($this->request->getPost());
+        $data->id = null;
 
         //save to db
         if ($this->modelCourse->save($data)) {

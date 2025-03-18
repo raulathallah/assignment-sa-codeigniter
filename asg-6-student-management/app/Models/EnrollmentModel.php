@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Libraries\DataParams;
 use CodeIgniter\Model;
 
 class EnrollmentModel extends Model
@@ -50,4 +51,43 @@ class EnrollmentModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getFilteredEnrollments(DataParams $params)
+    {
+        $enrollmentsData = $this
+            ->select('
+                enrollments.id as id,
+                students.name as studentName,
+                courses.name as courseName,
+                enrollments.status,
+                enrollments.academic_year,
+                enrollments.semester
+            ')
+            ->join('students', 'enrollments.student_id = students.id')
+            ->join('courses', 'enrollments.course_id = courses.id');
+
+        if (!in_groups('admin')) {
+            $enrollmentsData->where('students.user_id', user()->id);
+        }
+
+        if (!empty($params->search)) { // Apply search
+            $enrollmentsData->groupStart()
+                ->like('students.name', $params->search, 'both', null, true)
+                ->orLike('courses.name', $params->search, 'both', null, true)
+                ->groupEnd();
+        }
+
+        // Apply sort
+        // $allowedSortColumns = ['code', 'name'];
+        // $sort = in_array($params->sort, $allowedSortColumns) ? $params->sort : 'id';
+        // $order = ($params->order === 'desc') ? 'desc' : 'asc';
+        // $this->orderBy($sort, $order);
+
+        $result = [
+            'enrollments' => $enrollmentsData->paginate($params->perPage, 'enrollments', $params->page),
+            'pager' => $enrollmentsData->pager,
+            'total' => $enrollmentsData->countAllResults(false)
+        ];
+        return $result;
+    }
 }

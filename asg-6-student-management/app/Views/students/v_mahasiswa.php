@@ -10,7 +10,7 @@ Mahasiswa
     List Mahasiswa
   </div>
   <div class="card-body">
-    <a href="/student/create"><button class="btn custom-secondary mb-2"><i class="bi bi-plus"></i>Add Mahasiswa</button></a>
+    <a href="/student/create"><button class="btn btn-primary mb-2"><i class="bi bi-plus"></i>Add Mahasiswa</button></a>
     <form action="<?= $baseUrl ?>" method="get" class="form-inline">
       <div class="row mb-4">
         <div class="col-md-3">
