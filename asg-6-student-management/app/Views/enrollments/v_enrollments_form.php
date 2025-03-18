@@ -19,7 +19,7 @@ Enrollments
     Enrollment Form
   </div>
   <div class="card-body">
-    <form id="formData" action="/admin/enrollments/<?= $action; ?>" method="post" style="display: grid; gap: 5px">
+    <form id="formData" action="<?= $action; ?>" method="post" style="display: grid; gap: 5px">
 
       <input
         type="text"
@@ -29,21 +29,25 @@ Enrollments
         value="<?= $enrollment->id ?>"
         autofocus />
 
-      <div class="row row-cols-2">
-        <div class="col">
-          <div class="form-element mb-3">
-            <label
-              class="form-label">
-              Student
-            </label>
-            <select name="student_id" id="student_id" class="form-control">
-              <option value="" hidden>Select Student</option>
-              <?php foreach ($students as $row): ?>
-                <option value="<?= $row->id; ?>"><?= $row->name; ?></option>
-              <?php endforeach; ?>
-            </select>
+
+      <div class="row">
+        <?php if (in_groups('admin')): ?>
+          <div class="col">
+            <div class="form-element mb-3">
+              <label
+                class="form-label">
+                Student
+              </label>
+              <select name="student_id" id="student_id" class="form-control">
+                <option value="" hidden>Select Student</option>
+                <?php foreach ($students as $row): ?>
+                  <option value="<?= $row->id; ?>"><?= $row->name; ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+
           </div>
-        </div>
+        <?php endif; ?>
         <div class="col">
           <div class="form-element mb-3">
             <label
@@ -69,7 +73,6 @@ Enrollments
               placeholder="Academic Year" />
           </div>
         </div>
-
       </div>
       <button type="submit" class="btn btn-primary" style="width: fit-content;">Enroll</button>
     </form>

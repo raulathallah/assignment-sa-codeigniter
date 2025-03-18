@@ -12,6 +12,9 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', [Home::class, 'index']);
 
+$routes->get('email', [Home::class, 'sendEmail']);
+$routes->post('upload/upload', [Home::class, 'upload']);
+
 $routes->get('academic-statistic', [Academic::class, 'getAcademicStatistic']);
 
 $routes->group('', ['namespace' => 'App\Controllers'], function ($routes) {
@@ -28,6 +31,8 @@ $routes->group('', ['filter' => 'role:student'], function ($routes) {
 
 $routes->group('enrollments', ['filter' => 'role:student'], function ($routes) {
     $routes->get('/', 'Enrollment::index');
+    $routes->get('create', 'Enrollment::create');
+    $routes->post('store', 'Enrollment::store');
 });
 
 $routes->group('admin/enrollments', ['filter' => 'role:admin'], function ($routes) {

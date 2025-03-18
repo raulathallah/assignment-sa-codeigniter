@@ -10,6 +10,7 @@ use App\Models\CourseModel;
 use App\Models\EnrollmentModel;
 use App\Models\StudentModel;
 use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\I18n\Time;
 
 class Enrollment extends BaseController
 {
@@ -57,28 +58,69 @@ class Enrollment extends BaseController
         $new = new EntitiesEnrollment();
         $courses = $this->modelCourse->findAll();
         $students = $this->modelStudent->findAll();
-        return view('enrollments/v_enrollments_form', ['action' => 'store', 'enrollment' => $new, 'courses' => $courses, 'students' => $students]);
+
+        $actionRole = '';
+        $admin = '/admin/enrollments';
+        $student = '/enrollments';
+
+        if (in_groups('admin')) {
+            $actionRole = $admin . '/store';
+        } else {
+            $actionRole = $student . '/store';
+        }
+
+        return view('enrollments/v_enrollments_form', ['action' => $actionRole, 'enrollment' => $new, 'courses' => $courses, 'students' => $students]);
     }
 
     public function store()
     {
-        $data = new EntitiesEnrollment($this->request->getPost());
+        $userToEmail = user()->email;
 
-        $course = $this->modelCourse->find($this->request->getPost('course_id'));
+        $courseData = $this->modelCourse->find($this->request->getPost('course_id'));
+        $studentData = $this->modelStudent->where('user_id', user_id())->first();
 
-        $data->id = null;
-        $data->status = 'active';
-        $data->semester = $course->semester;
+        dd($studentData);
+        $email = service('email');
+        $email->setTo($userToEmail);
+        $email->setSubject('Course enrollments');
+        $data = [
+            'title' => 'Course Enrollment Information',
+            'name' => user()->username,
+            'studentId' => $studentData->student_id,
+            'courseCode' => $courseData->code,
+            'courseName' => $courseData->name,
+            'courseCredits' => $courseData->credits,
+            'date' => new Time()
+        ];
+        $message = view('email', $data); // Isi konten email
+        $email->setMessage($message);
 
-        $store = $this->modelEnrollment->save($data);
+        if ($email->send()) {
+            //return redirect()->to('/')->with('success', 'Email berhasil dikirim');
 
-        if (!$store) {
-            // Output any error (like if save failed)
-            dd($this->modelEnrollment->errors());
+            $data = new EntitiesEnrollment($this->request->getPost());
+
+            $course = $this->modelCourse->find($this->request->getPost('course_id'));
+
+            $data->id = null;
+            $data->status = 'active';
+            $data->semester = $course->semester;
+
+            $store = $this->modelEnrollment->save($data);
+
+            if (!$store) {
+                // Output any error (like if save failed)
+                dd($this->modelEnrollment->errors());
+            }
+
+            session()->setFlashdata('success', 'Enrollments berhasil disimpan');
+            return redirect()->to('admin/enrollments');
+        } else {
+
+            $data = ['error' => $email->printDebugger()];
+
+            return view('email_form', $data);
         }
-
-        session()->setFlashdata('success', 'Enrollments berhasil disimpan');
-        return redirect()->to('admin/enrollments');
     }
 
     public function delete($id)
